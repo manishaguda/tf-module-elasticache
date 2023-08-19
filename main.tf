@@ -37,3 +37,14 @@ resource "aws_security_group" "elasticache" {
 }
 
 
+
+resource "aws_elasticache_replication_groupcluster" "elasticache" {
+  replica_group_id     = "${var.env}-elasticache"
+  description          =  "${var.env}-elasticache"
+  node_type            = var.node_type
+  port                 = 6379
+  automatic_failover_enabled = true
+
+  num_cache_groups      = var.num_node_groups
+  replica_per_node_group = var.replicas_per_node_group
+
